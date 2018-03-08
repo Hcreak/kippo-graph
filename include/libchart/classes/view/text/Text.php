@@ -43,8 +43,11 @@ class Text
         //$this->fontCondensedBold = $baseDir . "fonts/DejaVuSansCondensed-Bold.ttf";
 
         //New font (OpenSans > FreeSans)
-        $this->fontCondensed = $baseDir . "fonts/OpenSans-Regular.ttf";
-        $this->fontCondensedBold = $baseDir . "fonts/OpenSans-Bold.ttf";
+        //$this->fontCondensed = $baseDir . "fonts/OpenSans-Regular.ttf";
+	//$this->fontCondensedBold = $baseDir . "fonts/OpenSans-Bold.ttf";
+	$this->fontCondensed = $baseDir . "fonts/wqy-microhei/wqy-microhei.ttc";
+        $this->fontCondensedBold = $baseDir . "fonts/wqy-microhei/wqy-microhei.ttc";
+
     }
 
     /**

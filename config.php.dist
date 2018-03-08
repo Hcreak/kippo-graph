@@ -12,6 +12,7 @@ define('DIR_ROOT', dirname(__FILE__));
 #  en: English | fr: French | de: German | it: Italian | es: Spanish
 #  nl: Dutch | el: Greek | et: Estonian | pl: Polish | sv: Swedish
 #  cs: Czech | sk: Slovak | ar: Arabic (currently not working)
+#  cn: Chinese
 require_once(DIR_ROOT . '/include/languages/lang.en.php');
 
 # MySQL server configuration: you will have to change the following
