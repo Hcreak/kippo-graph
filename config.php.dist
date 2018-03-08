@@ -84,4 +84,12 @@ define('BACK_END_PATH', '/opt/cowrie');
 # Python is a in-built script to make a static output
 # Values: JS or PYTHON
 define('PLAYBACK_SYSTEM', 'JS');
+
+################################################################
+# Google Map API Config
+# by Hcreak (xeonphi.cn) 
+
+define('MAP_LANGUAGE', 'zh_CN');
+define('MAP_API_KEY', 'AIzaSyCIIE1g-1hOnrQIV5trKNzuZGb7uFLFXM4');
+define('CHINESE_MODE', 'True');
 ?>

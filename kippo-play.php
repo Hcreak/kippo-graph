@@ -285,9 +285,20 @@ require('include/header.php');
                     <br />
                     <b>Google Map</b>:<br />
 
-                    <div id="map" style="width:100%;height:400px;margin-top:10px;"></div>
+		    <div id="map" style="width:100%;height:400px;margin-top:10px;"></div>
 
-                    <script type="text/javascript" src="//maps.google.com/maps/api/js?sensor=false"></script>
+		<?php
+		if (CHINESE_MODE == 'True') {
+			
+		    echo "<script type=\"text/javascript\" src=\"//ditu.google.cn/maps/api/js?sensor=false&language=".MAP_LANGUAGE."&key=".MAP_API_KEY."\"></script>";
+         
+		} else if (CHINESE_MODE == 'False') {
+
+                    echo "<script type=\"text/javascript\" src=\"//maps.google.com/maps/api/js?sensor=false&language=".MAP_LANGUAGE."&key=".MAP_API_KEY."\"></script>";
+
+		}
+		?>
+
                     <script type="text/javascript">
 
                         // Define the latitude and longitude positions
