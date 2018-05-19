@@ -613,6 +613,49 @@ class KippoInput
         }
     }
 
+    //2018-5-19 Hcreak Add
+    public function printYumCommands()
+    {
+        $db_query = "SELECT timestamp, input, session
+          FROM input
+          WHERE (input like '%yum install%' OR input like '%yum remove%')
+          AND input NOT LIKE 'yum'
+          GROUP BY input
+          ORDER BY timestamp DESC";
+
+        $rows = R::getAll($db_query);
+
+        if (count($rows)) {
+            //We create a skeleton for the table
+            $counter = 1;
+            echo '<h3>yum commands</h3>';
+            echo '<p>The following table displays the latest "yum" commands entered by attackers in the honeypot system.</p>';
+            echo '<p><a href="include/export.php?type=yum">CSV of all "yum" commands</a><p>';
+            echo '<table><thead>';
+            echo '<tr class="dark">';
+            echo '<th>ID</th>';
+            echo '<th>Timestamp</th>';
+            echo '<th>Input</th>';
+            echo '<th>Play Log</th>';
+            echo '</tr></thead><tbody>';
+
+            //For every row returned from the database we create a new table row with the data as columns
+            foreach($rows as $row) {
+                echo '<tr class="light word-break">';
+                echo '<td>' . $counter . '</td>';
+                echo '<td>' . date('l, d-M-Y, H:i A', strtotime($row['timestamp'])) . '</td>';
+                echo '<td>' . $this->xss_clean->clean_input($row['input']) . '</td>';
+                echo '<td><a href="kippo-play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play</a></td>';
+                echo '</tr>';
+                $counter++;
+            }
+
+            //Close tbody and table element, it's ready.
+            echo '</tbody></table>';
+            echo '<hr><br />';
+        }
+    }
+
 }
 
 ?>

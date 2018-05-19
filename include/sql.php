@@ -183,6 +183,15 @@ $db_aptget = "SELECT timestamp, input
   GROUP BY input
   ORDER BY timestamp DESC";
 
+// YUM COMMANDS
+// 2018-05-19 Hcreak Add
+$db_yum = "SELECT timestamp, input
+  FROM input
+  WHERE (input like '%yum install%' OR input like '%yum remove%')
+  AND input NOT LIKE 'yum'
+  GROUP BY input
+  ORDER BY timestamp DESC";
+
 // ALL IP ACTIVITY
 $db_allActivity = "SELECT A.timestamp as timestamp, A.session, ip, username, password, A.success, input
   FROM (SELECT * FROM auth) A
