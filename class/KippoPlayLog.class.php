@@ -24,14 +24,20 @@ class KippoPlayLog
         else
             $db_size = "LENGTH(ttylog)";
 
-        $db_query = "SELECT * FROM (SELECT ttylog.session, auth.timestamp, ROUND($db_size/1024, 2) AS size, COUNT(input) as input
-                     FROM ttylog
-                     JOIN auth ON ttylog.session = auth.session
-                     JOIN input ON ttylog.session = input.session
-                     WHERE auth.success = 1
-                     GROUP BY ttylog.session
-                     ORDER BY auth.timestamp ASC) s
-                     WHERE size > " . PLAYBACK_SIZE_IGNORE;
+        // $db_query = "SELECT * FROM (SELECT ttylog.session, auth.timestamp, ROUND($db_size/1024, 2) AS size, COUNT(input) as input
+        //              FROM ttylog
+        //              JOIN auth ON ttylog.session = auth.session
+        //              JOIN input ON ttylog.session = input.session
+        //              WHERE auth.success = 1
+        //              GROUP BY ttylog.session
+        //              ORDER BY auth.timestamp ASC) s
+        //              WHERE size > " . PLAYBACK_SIZE_IGNORE;
+
+        $db_query = "SELECT ttylog.session, timestamp
+                    FROM ttylog
+                    JOIN (SELECT session,timestamp FROM auth WHERE success=1) a
+                    ON ttylog.session = a.session 
+                    ORDER BY timestamp DESC";
 
         $rows = R::getAll($db_query);
 
@@ -42,8 +48,8 @@ class KippoPlayLog
         echo '<tr class="dark">';
         echo '<th>ID</th>';
         echo '<th>Timestamp</th>';
-        echo '<th>Size</th>';
-        echo '<th>Input Commands</th>';
+        //echo '<th>Size</th>';
+        //echo '<th>Input Commands</th>';
         echo '<th>Action</th>';
         echo '</tr></thead><tbody>';
 
@@ -56,8 +62,8 @@ class KippoPlayLog
                 echo '<tr class="light word-break">';
                 echo '<td>' . $counter . '</td>';
                 echo '<td>' . $row['timestamp'] . '</td>';
-                echo '<td>' . $row['size'] . 'kb' . '</td>';
-                echo '<td>' . $row['input'] . '</td>';
+                //echo '<td>' . $row['size'] . 'kb' . '</td>';
+                //echo '<td>' . $row['input'] . '</td>';
                 echo '<td><a href="kippo-play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play TTY Log</a></td>';
                 echo '</tr>';
                 $counter++;
