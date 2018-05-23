@@ -7,5 +7,5 @@ ALTER TABLE ttylog ADD size varchar(7);
 
 UPDATE ttylog SET size = ROUND(LENGTH(ttylog)/1024, 2);
 
-CREATE TRIGGER trigeer_size AFTER INSERT ON ttylog FOR EACH ROW
-    UPDATE ttylog set size = ROUND(LENGTH(ttylog)/1024, 2) WHERE session = new.session;
+CREATE TRIGGER trigger_size BEFORE INSERT ON ttylog FOR EACH ROW
+    set new.size = ROUND(LENGTH(new.ttylog)/1024, 2);

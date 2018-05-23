@@ -64,7 +64,7 @@ class KippoPlayLog
                 echo '<tr class="light word-break">';
                 echo '<td>' . $counter . '</td>';
                 echo '<td>' . $row['timestamp'] . '</td>';
-                echo '<td>' . $row['size'] . 'kb' . '</td>';
+                echo '<td>' . $row['size'] . ' KB' . '</td>';
                 //echo '<td>' . $row['input'] . '</td>';
                 echo '<td><a href="kippo-play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play TTY Log</a></td>';
                 echo '</tr>';
